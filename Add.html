@@ -32,35 +32,6 @@
     <br><br>
     <a id="Output3"></a>
         <script>
-                    //hashing base64 using key and Crypto-js
-const CryptoJS = require('crypto-js');
-const fs = require('fs');
-
-// Define the encryption and decryption functions
-function encryptFile(file, key) {
-  const fileType = file.split('.')[1];
-  const fileData = fs.readFileSync(file);
-  const encodedData = `TYPE:${fileType};${CryptoJS.AES.encrypt(fileData, key)}`;
-  return encodedData;
-}
-
-function decryptFile(encryptedData, key) {
-  const decodedData = atob(encryptedData.split(';')[1]);
-  const decryptedData = CryptoJS.AES.decrypt(decodedData, key);
-  const fileType = encryptedData.split(':')[1];
-  const fileName = `decrypted.${fileType}`;
-  fs.writeFileSync(fileName, decryptedData.toString(CryptoJS.enc.Utf8));
-}
-
-// Example usage
-// const filePath = 'ashutosh7i.txt';
-// const key = '8765';
-
-let key = "1234"
-
-
-
-
 
             //file to base64
             var BaseIMG;    //variable having base64
@@ -75,23 +46,11 @@ let key = "1234"
                 console.log(BaseIMG);
                 document.getElementById("Output1").innerHTML=("CID=",BaseIMG);
                 alert("file added to IPFS Network \n\n Copied to clipboard\n\n CID-\t"+BaseIMG);
-                
-                const encryptedData = encryptFile(BaseIMG, key);
-console.log('Encrypted data:', encryptedData);
-document.getElementById("Output2").innerHTML=(encryptedData);
-
-            
             });
     
             reader.readAsDataURL(file);
         });
         
-
-
-// const decryptedFile = decryptFile(encryptedData, key);
-// console.log(decryptedFile , 'File decrypted successfully.');
-
-
         </script>
 
 </body>
