@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DIS_v1</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+        <!--Navbar-->
+        <nav>
+            <ul>
+              <li><a href="/home/">Home</a></li>
+              <li><a href="/Add.html">Add</a></li>
+              <li><a href="/d/">View</a></li>
+              <li><a href="/our-team/">logs</a></li>
+              <li><a href="/contact-us/">Auth</a></li>
+            </ul>
+          </nav>
+          
+      
+        <!--File selection button-->  
+
+    <input type="file" name="add" id="fileInput">
+
+    <br><br><br>
+    <a id="Output1"></a>
+    <br><br>
+    <a id="Output2"></a>
+    <br><br>
+    <a id="Output3"></a>
+        <script>
+                    //hashing base64 using key and Crypto-js
+const CryptoJS = require('crypto-js');
+const fs = require('fs');
+
+// Define the encryption and decryption functions
+function encryptFile(file, key) {
+  const fileType = file.split('.')[1];
+  const fileData = fs.readFileSync(file);
+  const encodedData = `TYPE:${fileType};${CryptoJS.AES.encrypt(fileData, key)}`;
+  return encodedData;
+}
+
+function decryptFile(encryptedData, key) {
+  const decodedData = atob(encryptedData.split(';')[1]);
+  const decryptedData = CryptoJS.AES.decrypt(decodedData, key);
+  const fileType = encryptedData.split(':')[1];
+  const fileName = `decrypted.${fileType}`;
+  fs.writeFileSync(fileName, decryptedData.toString(CryptoJS.enc.Utf8));
+}
+
+// Example usage
+// const filePath = 'ashutosh7i.txt';
+// const key = '8765';
+
+let key = "1234"
+
+
+
+
+
+            //file to base64
+            var BaseIMG;    //variable having base64
+            const fileInput = document.getElementById("fileInput");
+            fileInput.addEventListener("change", e => {
+    
+                const file = fileInput.files[0];
+                const reader = new FileReader();
+    
+                reader.addEventListener("load", () =>{
+                BaseIMG=reader.result;
+                console.log(BaseIMG);
+                document.getElementById("Output1").innerHTML=("CID=",BaseIMG);
+                alert("file added to IPFS Network \n\n Copied to clipboard\n\n CID-\t"+BaseIMG);
+                
+                const encryptedData = encryptFile(BaseIMG, key);
+console.log('Encrypted data:', encryptedData);
+document.getElementById("Output2").innerHTML=(encryptedData);
+
+            
+            });
+    
+            reader.readAsDataURL(file);
+        });
+        
+
+
+// const decryptedFile = decryptFile(encryptedData, key);
+// console.log(decryptedFile , 'File decrypted successfully.');
+
+
+        </script>
+
+</body>
+</html>

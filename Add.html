@@ -1,57 +1,96 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DIS_v1</title>
-    <link rel="stylesheet" href="style.css">
-</head>
-<body>
+   <head>
+      <meta charset="UTF-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>DIS_v1</title>
+      <link rel="stylesheet" href="style.css">
+      <script defer src="Add.js"></script>
+      <script defer src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.2/rollups/aes.js" integrity="sha256-/H4YS+7aYb9kJ5OKhFYPUjSJdrtV6AeyJOtTkw6X72o=" crossorigin="anonymous"></script>
+   </head>
+   <body>
+      <!--Navbar-->
+      <nav>
+         <ul>
+            <li><a href="/home/">Home</a></li>
+            <li><a href="/Add.html">Add</a></li>
+            <li><a href="//">View</a></li>
+            <li><a href="/our-team/">logs</a></li>
+            <li><a href="/contact-us/">Auth</a></li>
+         </ul>
+      </nav>
+      <!--File selection button-->  
+      <div class="container">
+         <div class="tab-status">
+            <span class="tab active">1</span>
+            <span class="tab">2</span>
+            <span class="tab">3</span>
+         </div>
+         <form action="#">
+            <div role="tab-list">
+               <div role="tabpanel" id="Step1" class="tabpanel">
+                  <h1>Step 1</h1>
+                  <h3>Select the file</h3>
+                  <input type="file" class="form-input" id="page1data1">
+                  <br><br>
+                  <textarea cols="120" style="max-width: 100%; resize: none;" id="page1show1"></textarea>
+                  <br> <button id="page1show1" onclick="copyText()">Copy</button>
+                  <script>
+                     function copyText() {   // Function to copy the text from the textarea
+                     var textarea = document.querySelectorAll("#page1show1")
+                     textarea[0].select();   // Select the text in the textarea
+                     document.execCommand("copy");   // Copy the text to the clipboard
+                     alert("Base64 copied to clipboard!");   // Alert the user that the text has been copied
+                     }
+                  </script>
+               </div>
+               <div role="tabpanel" id="Step2" class="tabpanel hidden">
+                  <h1>Step 2</h1>
+                  <h3>Enter key</h3>
+                  <input type="text" class="form-input" id="page2data1" placeholder="key?"> <br><br> <button id="page2SubmitKey" type="submit">submit</button><br>
+                  <textarea cols="120" style="max-width: 100%; resize: none;" id="page2show1"></textarea>
+                  <br> <button id="page2show1" onclick="copyText2()">Copy</button>
+                  <script>
+                     function copyText2() {   // Function to copy the text from the textarea
+                     var textarea = document.querySelectorAll("#page2show1")
+                     textarea[0].select();   // Select the text in the textarea
+                     document.execCommand("copy");   // Copy the text to the clipboard
+                     alert("Hash copied to clipboard!");   // Alert the user that the text has been copied
+                     }
+                  </script>
+               </div>
+               <div role="tabpanel" id="Step3" class="tabpanel hidden">
+                  <h1>Step 3</h1>
+                  <h3>Upload file to <img width="7%" height="7%" src="https://upload.wikimedia.org/wikipedia/commons/1/18/Ipfs-logo-1024-ice-text.png"/></h3>
+                  <h5 style="font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;">Slide to upload ➡</h5>
+                  <div class="confirmation-slider">
+                     <div id="status">
+                        <input id="confirm" type="range" value="0" min="0" max="100" />
+                        <span class="notice">Uploading🚀</span>
+                     </div>
+                  </div>
+                     <div id="page3show2"></div>
+                  
+                  <textarea cols="120" style="max-width: 100%; resize: none;" id="page3show1"></textarea>
+                  <br> <button id="page3show1" onclick="copyText3()">Copy</button>
+                  <script>
+                     function copyText3() {   // Function to copy the text from the textarea
+                     var textarea3 = document.querySelectorAll("#page3show1")
+                     textarea3[0].select();   // Select the text in the textarea
+                     document.execCommand("copy");   // Copy the text to the clipboard
+                     alert("CID copied to clipboard!");   // Alert the user that the text has been copied
+                     }
+                  </script>
 
-        <!--Navbar-->
-        <nav>
-            <ul>
-              <li><a href="/home/">Home</a></li>
-              <li><a href="/Add.html">Add</a></li>
-              <li><a href="/d/">View</a></li>
-              <li><a href="/our-team/">logs</a></li>
-              <li><a href="/contact-us/">Auth</a></li>
-            </ul>
-          </nav>
-          
-      
-        <!--File selection button-->  
-
-    <input type="file" name="add" id="fileInput">
-
-    <br><br><br>
-    <a id="Output1"></a>
-    <br><br>
-    <a id="Output2"></a>
-    <br><br>
-    <a id="Output3"></a>
-        <script>
-
-            //file to base64
-            var BaseIMG;    //variable having base64
-            const fileInput = document.getElementById("fileInput");
-            fileInput.addEventListener("change", e => {
-    
-                const file = fileInput.files[0];
-                const reader = new FileReader();
-    
-                reader.addEventListener("load", () =>{
-                BaseIMG=reader.result;
-                console.log(BaseIMG);
-                document.getElementById("Output1").innerHTML=("CID=",BaseIMG);
-                alert("file added to IPFS Network \n\n Copied to clipboard\n\n CID-\t"+BaseIMG);
-            });
-    
-            reader.readAsDataURL(file);
-        });
-        
-        </script>
-
-</body>
+               </div>
+            </div>
+            <div class="pagination">
+               <a class="btn hidden" id="prev">Previous</a>
+               <a class="btn" id="next">Next</a>
+               <button class="btn btn-submit hidden" id="submit">Home</button>
+            </div>
+         </form>
+      </div>
+   </body>
 </html>
