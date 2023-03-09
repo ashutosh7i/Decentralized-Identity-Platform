@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+   <head>
+      <meta charset="UTF-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>View a file</title>
+      <link rel="stylesheet" href="style.css">
+      <script defer src="info.js"></script>
+   </head>
+   <body>
+      <!--Navbar-->
+      <nav>
+         <ul>
+            <li><a href="/home/">Home</a></li>
+            <li><a href="/Add.html">Add</a></li>
+            <li><a href="/View.html">View</a></li>
+            <li><a href="/our-team/">logs</a></li>
+            <li><a href="/contact-us/">Auth</a></li>
+         </ul>
+      </nav>
+      <!--File selection button-->  
+      <div class="container">
+         <form action="#">
+            <div role="tab-list">
+
+                <div role="tabpanel" id="Step1" class="tabpanel">
+                    <h1>CID Info</h1>
+                    <h3>Enter your CID-</h3>
+                    <input type="text" class="form-input" id="page1data1" placeholder="CID?"> <br>
+                 </div>
+  
+            <div class="pagination">
+                <input class="btn btn-submit hidden" type="submit" >
+            </div>
+            <br>
+            <textarea cols="120" style="max-width: 100%; resize: none;" id="page1copy1"></textarea>
+                    <br> <button id="page1copy1" onclick="copyText1()">Copy</button>
+                    <script>
+                       function copyText1() {   // Function to copy the text from the textarea
+                       var textarea = document.querySelectorAll("#page1copy1")
+                       textarea[0].select();   // Select the text in the textarea
+                       document.execCommand("copy");   // Copy the text to the clipboard
+                       alert("Hash copied to clipboard!");   // Alert the user that the text has been copied
+                       }
+                    </script>
+
+            <div id="page1show1"></div>
+
+            </div>
+         </form>
+      </div>
+   </body>
+</html>
