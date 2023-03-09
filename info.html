@@ -7,7 +7,20 @@
       <title>View a file</title>
       <link rel="stylesheet" href="style.css">
       <script defer src="info.js"></script>
+      <script defer src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.19.1/moment.min.js"></script> <!--Moments.js library, convert complex datetime to human readable-->
    </head>
+
+   <style>
+      .title{
+      font-family: 'candara';
+      font-weight: bold;
+      }
+      .bold {
+      font-weight: bold;
+      font-family: 'Trebuchet MS';
+      color: rgb(102, 255, 0);
+      }
+   </style>
    <body>
       <!--Navbar-->
       <nav>
@@ -21,7 +34,7 @@
       </nav>
       <!--File selection button-->  
       <div class="container">
-         <form action="#">
+         <form action="/View.html">
             <div role="tab-list">
 
                 <div role="tabpanel" id="Step1" class="tabpanel">
@@ -34,6 +47,8 @@
                 <input class="btn btn-submit hidden" type="submit" >
             </div>
             <br>
+            <div id="page1show1"></div>
+            <br>
             <textarea cols="120" style="max-width: 100%; resize: none;" id="page1copy1"></textarea>
                     <br> <button id="page1copy1" onclick="copyText1()">Copy</button>
                     <script>
@@ -41,11 +56,12 @@
                        var textarea = document.querySelectorAll("#page1copy1")
                        textarea[0].select();   // Select the text in the textarea
                        document.execCommand("copy");   // Copy the text to the clipboard
-                       alert("Hash copied to clipboard!");   // Alert the user that the text has been copied
+                       alert("Details copied to clipboard!");   // Alert the user that the text has been copied
                        }
                     </script>
+            <button class="btnRight">View</button>
 
-            <div id="page1show1"></div>
+         
 
             </div>
          </form>

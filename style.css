@@ -142,9 +142,9 @@ ul {
     color: white;
   }
   
-  /* .hidden {
+  .hidden {
     display: none;
-  } */
+  }
 
   h1{
     text-align: center;
@@ -156,6 +156,16 @@ ul {
     font-family: Verdana, Geneva, Tahoma, sans-serif;
   }
 
+  /*a button aligns on right used to redirect to other pages in end*/
+  .btnRight{
+    float: right;
+    border: 0;
+    background: rgb(119, 254, 0);
+    padding: 1.27rem;
+    border-radius: 25px; 
+    color: rgb(0, 0, 0);
+    cursor: pointer;
+  }
 
   /*css for the step3 confirmation slider*/
   .confirmation-slider {
