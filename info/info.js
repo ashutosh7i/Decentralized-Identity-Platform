@@ -4,6 +4,7 @@ const page1SubmitKey = document.querySelector(".btn-submit")
 const page1copy1 = document.querySelectorAll("#page1copy1")
 const page1show1 = document.querySelector("#page1show1")
 const btnRight = document.querySelector(".btnRight")
+const h3 = document.getElementById("h3")
 
 //a Super useful function that converts bytes to Size
 function bytesToSize(bytes) {
@@ -51,7 +52,10 @@ page1SubmitKey.addEventListener("click", (e) => {
       };
       
       fetch(`https://api.web3.storage/status/${page1data1.value}`, requestOptions)
-        .then(response => response.text())
+        .then(response => {
+            console.log(`Response status: ${response.status}`); // log the response status code
+            return response.text();
+          })
         .then(result => {
             //if CID is valid
 
@@ -86,7 +90,11 @@ page1SubmitKey.addEventListener("click", (e) => {
             btnRight.style.display="block"
 
         })
-        .catch(error => console.log('error', error));
+        .catch(error => {
+            console.error('error', error)
+            h3.innerHTML = '<centre><h1 style="color: red;">Error Occured \n Please Check your Internet</h1></centre>'
+            page1data1.style.display="none"
+        });
 
         //after click disable the submit button for prevention
         page1SubmitKey.style.display = "none"
