@@ -19,6 +19,7 @@ let Step2 = document.querySelector("#Step3")
 let page3data1 = document.querySelector("#page3data1")
 let page3show1 = document.querySelector("#page3show1")
 let page3show2 = document.querySelector("#page3show2")
+const h3 = document.getElementById("h3")
 
 const isEmpty = (str) => !str.trim().length
 let currentStep = 0
@@ -142,7 +143,7 @@ nextButton.addEventListener('click', (event) => {
         textarea3[1].style.display = "none";
 
         //js for step3 slider
-        let confirM = document.querySelector("#confirm")
+        let confirM = document.querySelector("#confirm");confirM.value=0;
         let deleteNotice = document.querySelectorAll(".notice")
         confirM.addEventListener('change', (e) => {
             e.preventDefault()
@@ -165,8 +166,10 @@ nextButton.addEventListener('click', (event) => {
             };
 
             fetch("https://api.web3.storage/upload", requestOptions)
-                .then(response => response.text())
-                // .then(result => console.log(result) )
+                .then(response => {
+                    console.log(`Response status: ${response.status}`); // log the response status code
+                    return response.text();
+                })
                 .then(result => {
                     CID = result;
                 })
@@ -189,11 +192,15 @@ nextButton.addEventListener('click', (event) => {
                     
                 })
                 .catch(error => {
-                    const NewDiv = document.createElement('div');
-                    // NewDiv.innerHTML = '<centre><h1 style="color: #57f309; border: #f34709;">Failed</h1>';
-                    NewDiv.innerText = error;
-                    NewDiv.classList.add('list-item');
-                    page3show2.appendChild(NewDiv);
+                        console.error('error', error)
+                        h3.innerHTML = '<centre><h1 style="color: red;">Error Occured \n Please Check your Internet</h1></centre>'
+                        page1data1.style.display="none"
+                    
+                    // const NewDiv = document.createElement('div');
+                    // // NewDiv.innerHTML = '<centre><h1 style="color: #57f309; border: #f34709;">Failed</h1>';
+                    // NewDiv.innerText = error;
+                    // NewDiv.classList.add('list-item');
+                    // page3show2.appendChild(NewDiv);
                 });
             }
         })
@@ -264,6 +271,7 @@ function updateStatusDisplay() {
         previousButton.classList.remove('hidden')
         submitButton.classList.add('hidden')
         console.log("second step")
+        page2data1.value = ""
     }
 }
 
