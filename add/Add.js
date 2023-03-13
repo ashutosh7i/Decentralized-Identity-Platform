@@ -31,10 +31,10 @@ var CID;
 //function to encode a file to base64
 function getBase64(file) {
     return new Promise((resolve, reject) => {
-      const reader = new FileReader();
-      reader.readAsDataURL(file);
-      reader.onload = () => resolve(reader.result);
-      reader.onerror = error => reject(error);
+        const reader = new FileReader();
+        reader.readAsDataURL(file);
+        reader.onload = () => resolve(reader.result);
+        reader.onerror = error => reject(error);
     });
 }
 
@@ -50,45 +50,45 @@ textarea1[1].style.display = "none";
 
 //when user add selects a file 
 page1data1.addEventListener('change', (e) => {
-   e.preventDefault();
-   console.log("File loaded");
-   //encode that file and show the hash to the textarea under it
+    e.preventDefault();
+    console.log("File loaded");
+    //encode that file and show the hash to the textarea under it
     getBase64(page1data1.files[0]).then((data) => {
-      const NewDiv = document.createElement('div');
-      NewDiv.innerText = data;
-      NewDiv.classList.add('list-item');
-      page1show1.appendChild(NewDiv);
-      //showing the base64 in textbox
-      Base64 = data;
-      textarea1[0].value = data;
-      textarea1[0].style.display = "block";
-      textarea1[1].style.display = "block";
+        const NewDiv = document.createElement('div');
+        NewDiv.innerText = data;
+        NewDiv.classList.add('list-item');
+        page1show1.appendChild(NewDiv);
+        //showing the base64 in textbox
+        Base64 = data;
+        textarea1[0].value = data;
+        textarea1[0].style.display = "block";
+        textarea1[1].style.display = "block";
     });
 })
 
 
 // Next: Change UI relative to current step and account for button permissions
 nextButton.addEventListener('click', (event) => {
-   event.preventDefault()
+    event.preventDefault()
 
-   console.log("next Button Clicked")
-   // Hide current tab
-   tabPanels[currentStep].classList.add('hidden')
-   tabTargets[currentStep].classList.remove('active')
+    console.log("next Button Clicked")
+    // Hide current tab
+    tabPanels[currentStep].classList.add('hidden')
+    tabTargets[currentStep].classList.remove('active')
 
-   // Show next tab
-   tabPanels[currentStep + 1].classList.remove('hidden')
-   tabTargets[currentStep + 1].classList.add('active')
-   currentStep += 1
-
-
-   //   //When click next on step1-
-   //   //converting the file to base64
-   //   //creating a div to be shown on second page
-   //   //add that item/div to the html list
+    // Show next tab
+    tabPanels[currentStep + 1].classList.remove('hidden')
+    tabTargets[currentStep + 1].classList.add('active')
+    currentStep += 1
 
 
-   //when on step2
+    //   //When click next on step1-
+    //   //converting the file to base64
+    //   //creating a div to be shown on second page
+    //   //add that item/div to the html list
+
+
+    //when on step2
     if (currentStep == 1) {
 
 
@@ -111,12 +111,12 @@ nextButton.addEventListener('click', (event) => {
             }
         })
 
-      //keep the textbox hidden untill submitting
-      var textarea2 = document.querySelectorAll("#page2show1") //document.getElementById("page1show1");
-      textarea2[0].style.display = "none";
-      textarea2[1].style.display = "none";
+        //keep the textbox hidden untill submitting
+        var textarea2 = document.querySelectorAll("#page2show1") //document.getElementById("page1show1");
+        textarea2[0].style.display = "none";
+        textarea2[1].style.display = "none";
 
-      //when submit key pressed
+        //when submit key pressed
         page2SubmitKey.addEventListener('click', (e) => {
             e.preventDefault();
             console.log("Key Entered");
@@ -143,100 +143,100 @@ nextButton.addEventListener('click', (event) => {
         textarea3[1].style.display = "none";
 
         //js for step3 slider
-        let confirM = document.querySelector("#confirm");confirM.value=0;
+        let confirM = document.querySelector("#confirm"); confirM.value = 0;
         let deleteNotice = document.querySelectorAll(".notice")
         confirM.addEventListener('change', (e) => {
             e.preventDefault()
             //console.log(confirM.value)
             if (confirM.value > 99) {
-            confirM.style.display = "none";
-            deleteNotice[0].style.display = "block";
+                confirM.style.display = "none";
+                deleteNotice[0].style.display = "block";
 
 
-            //upload the file to IPFS
-            var myHeaders = new Headers();
-            myHeaders.append("Authorization", "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJkaWQ6ZXRocjoweDFCN2Q5RTk4Qzg1Njc4MWVhRDJEMzBBNjkzYkU0NjgzM2E0Mjg1QjciLCJpc3MiOiJ3ZWIzLXN0b3JhZ2UiLCJpYXQiOjE2Nzc3NDMxOTI3OTIsIm5hbWUiOiJESVMifQ.B-zCBx7XBk-5KVDyL-Vgdk1T2zOuBQ3b7QMfPTDRc-M");
-            myHeaders.append("Content-Type", "text/plain");
+                //upload the file to IPFS
+                var myHeaders = new Headers();
+                myHeaders.append("Authorization", "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJkaWQ6ZXRocjoweDFCN2Q5RTk4Qzg1Njc4MWVhRDJEMzBBNjkzYkU0NjgzM2E0Mjg1QjciLCJpc3MiOiJ3ZWIzLXN0b3JhZ2UiLCJpYXQiOjE2Nzc3NDMxOTI3OTIsIm5hbWUiOiJESVMifQ.B-zCBx7XBk-5KVDyL-Vgdk1T2zOuBQ3b7QMfPTDRc-M");
+                myHeaders.append("Content-Type", "text/plain");
 
-            var requestOptions = {
-               method: 'POST',
-               headers: myHeaders,
-               body: Cyphertext,
-               redirect: 'follow'
-            };
+                var requestOptions = {
+                    method: 'POST',
+                    headers: myHeaders,
+                    body: Cyphertext,
+                    redirect: 'follow'
+                };
 
-            fetch("https://api.web3.storage/upload", requestOptions)
-                .then(response => {
-                    console.log(`Response status: ${response.status}`); // log the response status code
-                    return response.text();
-                })
-                .then(result => {
-                    CID = result;
-                })
-                .then(() => {
-                    //parsing only cid from response
-                    let json_cid = JSON.parse(CID)
-                    var onlyCid = json_cid.cid
-                    console.log(onlyCid) 
-                    alert("File Uploaded Successfully\nCID=\n"+onlyCid)
+                fetch("https://api.web3.storage/upload", requestOptions)
+                    .then(response => {
+                        console.log(`Response status: ${response.status}`); // log the response status code
+                        return response.text();
+                    })
+                    .then(result => {
+                        CID = result;
+                    })
+                    .then(() => {
+                        //parsing only cid from response
+                        let json_cid = JSON.parse(CID)
+                        var onlyCid = json_cid.cid
+                        console.log(onlyCid)
+                        alert("File Uploaded Successfully\nCID=\n" + onlyCid)
 
-                    //show the cyphertext in textbox
-                    textarea3[0].value = onlyCid
-                    textarea3[0].style.display = "block";
-                    textarea3[1].style.display = "block";
-                    //showing success on webpage
-                    const NewDiv = document.createElement('div');
-                    NewDiv.innerHTML = '<centre><h1 style="color: #57f309; border: #f34709;">File Uploaded to IPFS✅</h1>';
-                    NewDiv.classList.add('list-item');
-                    page3show2.appendChild(NewDiv);
-                    
-                })
-                .catch(error => {
+                        //show the cyphertext in textbox
+                        textarea3[0].value = onlyCid
+                        textarea3[0].style.display = "block";
+                        textarea3[1].style.display = "block";
+                        //showing success on webpage
+                        const NewDiv = document.createElement('div');
+                        NewDiv.innerHTML = '<centre><h1 style="color: #57f309; border: #f34709;">File Uploaded to IPFS✅</h1>';
+                        NewDiv.classList.add('list-item');
+                        page3show2.appendChild(NewDiv);
+
+                    })
+                    .catch(error => {
                         console.error('error', error)
                         h3.innerHTML = '<centre><h1 style="color: red;">Error Occured \n Please Check your Internet</h1></centre>'
-                        page1data1.style.display="none"
-                    
-                    // const NewDiv = document.createElement('div');
-                    // // NewDiv.innerHTML = '<centre><h1 style="color: #57f309; border: #f34709;">Failed</h1>';
-                    // NewDiv.innerText = error;
-                    // NewDiv.classList.add('list-item');
-                    // page3show2.appendChild(NewDiv);
-                });
+                        page1data1.style.display = "none"
+
+                        // const NewDiv = document.createElement('div');
+                        // // NewDiv.innerHTML = '<centre><h1 style="color: #57f309; border: #f34709;">Failed</h1>';
+                        // NewDiv.innerText = error;
+                        // NewDiv.classList.add('list-item');
+                        // page3show2.appendChild(NewDiv);
+                    });
             }
         })
 
 
     }
 
-   //   //encode the file to base64---------1
-   //     //encode the file to base64
-   //   let base64String = fileToBase64(page1data1.files[0])
-   //   page1show1.textContent = base64String
+    //   //encode the file to base64---------1
+    //     //encode the file to base64
+    //   let base64String = fileToBase64(page1data1.files[0])
+    //   page1show1.textContent = base64String
 
-   //    //convert base64 to hash using key-------------2
-   //    let encryptionKey = page2data1.value
-   //    let hash = base64ToEncryption(base64String, encryptionKey)
+    //    //convert base64 to hash using key-------------2
+    //    let encryptionKey = page2data1.value
+    //    let hash = base64ToEncryption(base64String, encryptionKey)
 
-   //   validateEntry()
-   updateStatusDisplay()
+    //   validateEntry()
+    updateStatusDisplay()
 })
 
 // Previous: Change UI relative to current step and account for button permissions
 previousButton.addEventListener('click', (event) => {
-   event.preventDefault()
-   console.log("previous Button Clicked")
+    event.preventDefault()
+    console.log("previous Button Clicked")
 
-   // Hide current tab
-   tabPanels[currentStep].classList.add('hidden')
-   tabTargets[currentStep].classList.remove('active')
+    // Hide current tab
+    tabPanels[currentStep].classList.add('hidden')
+    tabTargets[currentStep].classList.remove('active')
 
-   // Show previous tab
-   tabPanels[currentStep - 1].classList.remove('hidden')
-   tabTargets[currentStep - 1].classList.add('active')
-   currentStep -= 1
+    // Show previous tab
+    tabPanels[currentStep - 1].classList.remove('hidden')
+    tabTargets[currentStep - 1].classList.add('active')
+    currentStep -= 1
 
-   nextButton.removeAttribute('disabled')
-   updateStatusDisplay()
+    nextButton.removeAttribute('disabled')
+    updateStatusDisplay()
 })
 
 //submit button
@@ -244,7 +244,7 @@ submitButton.addEventListener('click', (event) => {
     event.preventDefault()
     console.log("Completed")
     alert("Redirecting to Home")
-     window.location.href = "/";
+    window.location.href = "/";
 })
 
 function updateStatusDisplay() {
@@ -254,7 +254,7 @@ function updateStatusDisplay() {
         previousButton.classList.remove('hidden')
         submitButton.classList.remove('hidden')
         validateEntry()
-        
+
 
 
         // If it's the first step hide the previous button
@@ -276,19 +276,19 @@ function updateStatusDisplay() {
 }
 
 function validateEntry() {
-   let input = tabPanels[currentStep].querySelector('.form-input')
+    let input = tabPanels[currentStep].querySelector('.form-input')
 
-   // Start but disabling continue button
-   nextButton.setAttribute('disabled', true)
-   submitButton.setAttribute('disabled', true)
+    // Start but disabling continue button
+    nextButton.setAttribute('disabled', true)
+    submitButton.setAttribute('disabled', true)
 
-   // Validate on initial function fire
-   setButtonPermissions(input)
+    // Validate on initial function fire
+    setButtonPermissions(input)
 
-   // Validate on input
-   input.addEventListener('input', () => setButtonPermissions(input))
-   // Validate if bluring from input
-   input.addEventListener('blur', () => setButtonPermissions(input))
+    // Validate on input
+    input.addEventListener('input', () => setButtonPermissions(input))
+    // Validate if bluring from input
+    input.addEventListener('blur', () => setButtonPermissions(input))
 }
 
 function setButtonPermissions(input) {
