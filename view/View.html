@@ -7,6 +7,7 @@
       <title>View a file</title>
       <link rel="stylesheet" href="../style.css">
       <script defer src="View.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js" integrity="sha512-E8QSvWZ0eCLGk4km3hxSsNmGWbLtSCSUcewDQPQWZF6pEU8GlT8a5fF32wOl1i8ftdMhssTrF/OhyGWwonTcXA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
    </head>
    <body>
       <!--Navbar-->
@@ -32,8 +33,8 @@
 
                 <div role="tabpanel" id="Step1" class="tabpanel">
                     <h1>Step 1</h1>
-                    <h3>Enter your CID</h3>
-                    <input type="text" class="form-input" id="page1data1" placeholder="CID?"> <br><br> <button id="page1SubmitKey" type="submit">submit</button><br>
+                    <h3 class="h3">Enter your CID</h3>
+                    <input type="text" class="form-input" id="page1data1" placeholder="CID?"> <br><br> <!--<button id="page1SubmitKey" type="submit">submit</button><br>-->
                     <textarea cols="120" style="max-width: 100%; resize: none;" id="page1show1"></textarea>
                     <br> <button id="page1show1" onclick="copyText1()">Copy</button>
                     <script>
@@ -49,7 +50,7 @@
 
                <div role="tabpanel" id="Step2" class="tabpanel hidden">
                   <h1>Step 2</h1>
-                  <h3>Enter your key</h3>
+                  <h3 class="h3">Enter your key</h3>
                   <input type="text" class="form-input" id="page2data1" placeholder="key?"> <br><br> <button id="page2SubmitKey" type="submit">submit</button><br>
                   <textarea cols="120" style="max-width: 100%; resize: none;" id="page2show1"></textarea>
                   <br> <button id="page2show1" onclick="copyText2()">Copy</button>
@@ -64,26 +65,11 @@
                </div>
                <div role="tabpanel" id="Step3" class="tabpanel hidden">
                   <h1>Step 3</h1>
-                  <h3>Upload file to <img width="7%" height="7%" src="https://upload.wikimedia.org/wikipedia/commons/1/18/Ipfs-logo-1024-ice-text.png"/></h3>
-                  <h5 style="font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;">Slide to upload ➡</h5>
-                  <div class="confirmation-slider">
-                     <div id="status">
-                        <input id="confirm" type="range" value="0" min="0" max="100" />
-                        <span class="notice">Uploading🚀</span>
-                     </div>
-                  </div>
-                     <div id="page3show2"></div>
+                  <h3>Download File</h3>
+                  <h5 style="font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;">Click to download again</h5>
                   
-                  <textarea cols="120" style="max-width: 100%; resize: none;" id="page3show1"></textarea>
-                  <br> <button id="page3show1" onclick="copyText3()">Copy</button>
-                  <script>
-                     function copyText3() {   // Function to copy the text from the textarea
-                     var textarea3 = document.querySelectorAll("#page3show1")
-                     textarea3[0].select();   // Select the text in the textarea
-                     document.execCommand("copy");   // Copy the text to the clipboard
-                     alert("CID copied to clipboard!");   // Alert the user that the text has been copied
-                     }
-                  </script>
+                     <button id="page3show1" >Download Again</button>
+
 
                </div>
             </div>
