@@ -35,6 +35,7 @@ let Step2 = document.querySelector("#Step3")
 let page3data1 = document.querySelector("#page3data1")
 let page3show1 = document.querySelector("#page3show1")
 let h3 = document.querySelectorAll("h3");
+let page3Result = document.getElementById("page3result");
 
 const isEmpty = (str) => !str.trim().length
 let currentStep = 0
@@ -204,6 +205,35 @@ nextButton.addEventListener('click', (event) => {
 
 
         downloadBase64File(Base64);
+
+        //showing the file in the page
+        function displayBase64Data(base64String) {
+            // Determine the MIME type of the data
+            const mimeType = base64String.split(',')[0].split(':')[1].split(';')[0];
+
+            // Create an HTML element based on the MIME type
+            let element;
+            if (mimeType.startsWith('image/')) {
+                element = document.createElement('img');
+                element.src = base64String;
+                element.style.width = '4.7cm';
+                element.style.height = '4.7cm';
+            } else if (mimeType === 'application/pdf') {
+                element = document.createElement('iframe');
+                element.src = base64String;
+                element.style.width = '7cm';
+                element.style.height = '7cm';
+            } else {
+                element = document.createElement('div');
+                element.textContent = atob(base64String.split(',')[1]);
+            }
+
+            // Append the element to the document body
+            page3Result.appendChild(element);
+        }
+
+        displayBase64Data(Base64);
+
 
 
 
