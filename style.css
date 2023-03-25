@@ -281,3 +281,18 @@ ul {
       background: #2497E3;
     }
     
+
+/* Copy textbox emoji css */
+    .copy-container {
+      position: relative;
+      /* display: inline-block; */
+    }
+    .copy-icon {
+      position: absolute;
+      top: 35%;
+      right: 10px;
+      transform: translateY(-50%);
+      font-size: 1.5em;
+      cursor: pointer;
+    }
+

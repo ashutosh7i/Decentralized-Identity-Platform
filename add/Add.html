@@ -9,16 +9,40 @@
       <script defer src="Add.js"></script>
       <script defer src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.2/rollups/aes.js" integrity="sha256-/H4YS+7aYb9kJ5OKhFYPUjSJdrtV6AeyJOtTkw6X72o=" crossorigin="anonymous"></script>
    </head>
+
+   <script>
+
+      //seperate navbar
+      fetch("/navbar.html")
+      .then(response => response.text())
+      .then(data => document.getElementById("navbar").innerHTML = data);
+      
+      // master function for copying textbox and alerts
+      function copyText(i) {   // Function to copy the text from the textarea
+      var textarea = document.querySelectorAll(`#page${i}show1`)
+      textarea[0].select();   // Select the text in the textarea
+      document.execCommand("copy");   // Copy the text to the clipboard
+      
+      if(i === 1){
+         alert("Base64 copied to clipboard!");   // Alert the user that the text has been copied
+      }
+      else if(i === 2){
+         alert("CypherText copied to clipboard!");
+      }
+      else if(i === 3){
+         alert("CID copied to clipboard!");
+      }
+      else{
+         console.err(error,"error in master js function");
+      }
+   }
+   </script>
+
+
    <body>
       <!--Navbar-->
       <div id="navbar"></div>
 
-      <script>    //seperate navbar
-          fetch("/navbar.html")
-          .then(response => response.text())
-          .then(data => document.getElementById("navbar").innerHTML = data);
-      </script>
-      
       <!--File selection button-->  
       <div class="container">
          <div class="tab-status">
@@ -33,31 +57,20 @@
                   <h3 id="h3" >Select a file</h3>
                   <input type="file" class="form-input" id="page1data1">
                   <br><br>
+               <div class="copy-container">
                   <textarea cols="120" style="max-width: 100%; resize: none;" id="page1show1"></textarea>
-                  <br> <button id="page1show1" onclick="copyText()">Copy</button>
-                  <script>
-                     function copyText() {   // Function to copy the text from the textarea
-                     var textarea = document.querySelectorAll("#page1show1")
-                     textarea[0].select();   // Select the text in the textarea
-                     document.execCommand("copy");   // Copy the text to the clipboard
-                     alert("Base64 copied to clipboard!");   // Alert the user that the text has been copied
-                     }
-                  </script>
+                  <br> <i onclick="copyText(1)" id="page1show1" class="copy-icon">📋</i>
+               </div>
+
                </div>
                <div role="tabpanel" id="Step2" class="tabpanel hidden">
                   <h1>Step 2</h1>
                   <h3>Enter your key</h3>
                   <input type="text" class="form-input" id="page2data1" placeholder="key?"> <br><br> <button id="page2SubmitKey" type="submit">submit</button><br>
-                  <textarea cols="120" style="max-width: 100%; resize: none;" id="page2show1"></textarea>
-                  <br> <button id="page2show1" onclick="copyText2()">Copy</button>
-                  <script>
-                     function copyText2() {   // Function to copy the text from the textarea
-                     var textarea = document.querySelectorAll("#page2show1")
-                     textarea[0].select();   // Select the text in the textarea
-                     document.execCommand("copy");   // Copy the text to the clipboard
-                     alert("Hash copied to clipboard!");   // Alert the user that the text has been copied
-                     }
-                  </script>
+                  <div class="copy-container">
+                     <textarea cols="120" style="max-width: 100%; resize: none;" id="page2show1"></textarea>
+                     <br> <i onclick="copyText(2)" id="page2show1" class="copy-icon">📋</i>
+                  </div>
                </div>
                <div role="tabpanel" id="Step3" class="tabpanel hidden">
                   <h1>Step 3</h1>
@@ -71,16 +84,10 @@
                   </div>
                      <div id="page3show2"></div>
                   
-                  <textarea cols="120" style="max-width: 100%; resize: none;" id="page3show1"></textarea>
-                  <br> <button id="page3show1" onclick="copyText3()">Copy</button>
-                  <script>
-                     function copyText3() {   // Function to copy the text from the textarea
-                     var textarea3 = document.querySelectorAll("#page3show1")
-                     textarea3[0].select();   // Select the text in the textarea
-                     document.execCommand("copy");   // Copy the text to the clipboard
-                     alert("CID copied to clipboard!");   // Alert the user that the text has been copied
-                     }
-                  </script>
+                     <div class="copy-container">
+                        <textarea cols="120" style="max-width: 100%; resize: none;" id="page3show1"></textarea>
+                        <br> <i onclick="copyText(3)" id="page3show1" class="copy-icon">📋</i>
+                     </div>
 
                </div>
             </div>
