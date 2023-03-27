@@ -8,6 +8,7 @@ const nextButton = document.querySelector('#next')
 const submitButton = document.querySelector('#submit')
 const tabTargets = document.querySelectorAll('.tab')
 const tabPanels = document.querySelectorAll('.tabpanel')
+const HomeButton = document.getElementById('homebutton')
 
 let page1data1 = document.querySelector('#page1data1')
 let page1show1 = document.querySelector("#page1show1")
@@ -40,6 +41,7 @@ function getBase64(file) {
 
 // Validate first input on load
 validateEntry()
+HomeButton.style.display = "none"
 
 //Step 1
 //when a file is selected by the user
@@ -99,11 +101,11 @@ nextButton.addEventListener('click', (event) => {
         //Step2 
         //when user enters the key
         page2SubmitKey.style.display = "none" //hide the submit button by default
+        nextButton.style.display = "none"
         page2data1.addEventListener('input', (e) => { //show submit button only when something is present inside input field
             e.preventDefault()
             if (page2data1.value !== "") {
                 page2SubmitKey.style.display = "block"
-
             }
             else {
                 validateEntry()
@@ -115,6 +117,7 @@ nextButton.addEventListener('click', (event) => {
         var textarea2 = document.querySelectorAll("#page2show1") //document.getElementById("page1show1");
         textarea2[0].style.display = "none";
         textarea2[1].style.display = "none";
+        nextButton.style.display = "none"
 
         //when submit key pressed
         page2SubmitKey.addEventListener('click', (e) => {
@@ -129,6 +132,7 @@ nextButton.addEventListener('click', (event) => {
             textarea2[0].value = encryptedBase64
             textarea2[0].style.display = "block";
             textarea2[1].style.display = "block";
+            nextButton.style.display = "block"
 
 
         })
@@ -136,6 +140,11 @@ nextButton.addEventListener('click', (event) => {
     else if (currentStep == 2) {
         console.log("you are on step3")
         console.log(Cyphertext)
+
+        //hiding unused buttons
+        nextButton.style.display = "none"
+        previousButton.style.display = "none"
+        submitButton.style.display = "none"
 
         //hiding the textarea and copy button on step3 by default
         var textarea3 = document.querySelectorAll("#page3show1") //document.getElementById("page1show1");
@@ -180,6 +189,10 @@ nextButton.addEventListener('click', (event) => {
                         console.log(onlyCid)
                         alert("File Uploaded Successfully\nCID=\n" + onlyCid)
 
+                        //hiding unused buttons
+                        nextButton.style.display = "none"
+                        previousButton.style.display = "none"
+
                         //show the cyphertext in textbox
                         textarea3[0].value = onlyCid
                         textarea3[0].style.display = "block";
@@ -189,6 +202,11 @@ nextButton.addEventListener('click', (event) => {
                         NewDiv.innerHTML = '<centre><h1 style="color: #57f309; border: #f34709;">File Uploaded to IPFS✅</h1>';
                         NewDiv.classList.add('list-item');
                         page3show2.appendChild(NewDiv);
+
+                        HomeButton.style.display = "block"
+                        HomeButton.addEventListener('click', (e) => {
+                            location.href = '/'
+                        })
 
                     })
                     .catch(error => {
