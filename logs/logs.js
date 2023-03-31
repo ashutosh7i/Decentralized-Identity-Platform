@@ -6,6 +6,9 @@ const page1show1 = document.querySelector("#page1show1")
 const btnRight = document.querySelector(".btnRight")
 const h3 = document.getElementById("h3")
 
+//after Authorization, api key can be taken from storage
+const UserApiKey = localStorage.getItem("ApiKey");
+
 //a Super useful function that converts bytes to Size
 function bytesToSize(bytes) {
     var sizes = ['Bytes', 'KB', 'MB', 'GB', 'TB'];
@@ -25,7 +28,8 @@ btnRight.style.display ="none"
 
 //api configuration
 var myHeaders = new Headers();
-myHeaders.append("Authorization", "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJkaWQ6ZXRocjoweDFCN2Q5RTk4Qzg1Njc4MWVhRDJEMzBBNjkzYkU0NjgzM2E0Mjg1QjciLCJpc3MiOiJ3ZWIzLXN0b3JhZ2UiLCJpYXQiOjE2Nzc3NDMxOTI3OTIsIm5hbWUiOiJESVMifQ.B-zCBx7XBk-5KVDyL-Vgdk1T2zOuBQ3b7QMfPTDRc-M");
+
+myHeaders.append("Authorization", `Bearer ${UserApiKey}`);
 
 var requestOptions = {
   method: 'GET',

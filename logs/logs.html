@@ -63,4 +63,15 @@
          </form>
       </div>
    </body>
+   <script>//auth check
+      if(localStorage.Username == undefined) {
+            console.log("not logged in")
+            let statusDiv=document.querySelector('.container');
+            statusDiv.className="null";//no class
+            statusDiv.innerHTML = '<div style="position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); font-family:verdana; font-weight:bold; font-size:25px; color: #57f309; border: #f34709; background-color: #e94f55; padding: 20px;"><p>You need to be Logged in.</p><button  onclick=login()>Login</button></div>';
+        }
+        function login(){
+         window.location.replace("../auth/auth.html");
+        }
+      </script>
 </html>
