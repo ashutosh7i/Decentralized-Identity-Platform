@@ -22,6 +22,10 @@ let page3show1 = document.querySelector("#page3show1")
 let page3show2 = document.querySelector("#page3show2")
 const h3 = document.getElementById("h3")
 
+//after Authorization, api key can be taken from storage
+const UserApiKey = localStorage.getItem("ApiKey");
+
+
 const isEmpty = (str) => !str.trim().length
 let currentStep = 0
 
@@ -164,7 +168,7 @@ nextButton.addEventListener('click', (event) => {
 
                 //upload the file to IPFS
                 var myHeaders = new Headers();
-                myHeaders.append("Authorization", "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJkaWQ6ZXRocjoweDFCN2Q5RTk4Qzg1Njc4MWVhRDJEMzBBNjkzYkU0NjgzM2E0Mjg1QjciLCJpc3MiOiJ3ZWIzLXN0b3JhZ2UiLCJpYXQiOjE2Nzc3NDMxOTI3OTIsIm5hbWUiOiJESVMifQ.B-zCBx7XBk-5KVDyL-Vgdk1T2zOuBQ3b7QMfPTDRc-M");
+                myHeaders.append("Authorization", `Bearer ${UserApiKey}`);
                 myHeaders.append("Content-Type", "text/plain");
 
                 var requestOptions = {
