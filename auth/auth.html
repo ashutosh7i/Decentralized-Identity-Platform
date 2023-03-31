@@ -1,31 +1,209 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang='en'>
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Auth🔐</title>
-    <link rel="stylesheet" href="../style.css">
+<meta charset='UTF-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1.0'>
+<meta http-equiv='X-UA-Compatible' content='ie=edge'>
+<link rel="stylesheet" href="../style.css">
+<title>Authorization</title>
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;600&display=swap" rel="stylesheet">
 
+
+    <!--Stylesheet-->
+    <style media="screen">
+      *,
+*:before,
+*:after{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+body{
+    background-color: #000000;
+}
+.background{
+    width: 430px;
+    height: 520px;
+    position: absolute;
+    transform: translate(-50%,-50%);
+    left: 50%;
+    top: 50%;
+}
+.background .shape{
+    height: 200px;
+    width: 200px;
+    position: absolute;
+    border-radius: 50%;
+}
+
+form{
+    height: 520px;
+    width: 400px;
+    background-color: rgba(244, 69, 69, 0.908);
+    position: absolute;
+    transform: translate(-50%,-50%);
+    top: 50%;
+    left: 50%;
+    border-radius: 10px;
+    backdrop-filter: blur(10px);
+    border: 2px solid rgba(255,255,255,0.1);
+    box-shadow: 0 0 40px rgba(8,7,16,0.6);
+    padding: 50px 35px;
+}
+form *{
+    font-family: 'Poppins',sans-serif;
+    color: #ffffff;
+    letter-spacing: 0.5px;
+    outline: none;
+    border: none;
+}
+form h3{
+    font-size: 32px;
+    font-weight: 500;
+    line-height: 42px;
+    text-align: center;
+}
+
+label{
+    display: block;
+    margin-top: 30px;
+    font-size: 16px;
+    font-weight: 500;
+}
+input{
+    display: block;
+    height: 50px;
+    width: 100%;
+    background-color: rgba(255,255,255,0.07);
+    border-radius: 3px;
+    padding: 0 10px;
+    margin-top: 8px;
+    font-size: 14px;
+    font-weight: 300;
+}
+::placeholder{
+    color: #e5e5e5;
+}
+button{
+    margin-top: 50px;
+    width: 100%;
+    background-color: #ffffff;
+    color: #080710;
+    padding: 15px 0;
+    font-size: 18px;
+    font-weight: 600;
+    border-radius: 5px;
+    cursor: pointer;
+}
+.social{
+  margin-top: 30px;
+  display: flex;
+}
+.social div{
+  background: red;
+  width: 150px;
+  border-radius: 3px;
+  padding: 5px 10px 10px 5px;
+  background-color: rgba(255,255,255,0.27);
+  color: #eaf0fb;
+  text-align: center;
+}
+.social div:hover{
+  background-color: rgba(255,255,255,0.47);
+}
+.social .fb{
+  margin-left: 25px;
+}
+.social i{
+  margin-right: 4px;
+}
+
+    </style>
 </head>
 <body>
 
-      <!--Navbar-->
-      <div id="navbar"></div>
+          <!-- Navbar -->
+<div id="navbar"></div>
 
-      <script>    //seperate navbar
-          fetch("/navbar.html")
-          .then(response => response.text())
-          .then(data => document.getElementById("navbar").innerHTML = data);
-      </script>
-      
-      
-<div class="align-middle">
-  <h1 class="text-centre ">
-    Auth Under Construction</h1>
-</div>
+<script>    //seperate navbar
+    fetch("/navbar.html")
+    .then(response => response.text())
+    .then(data => document.getElementById("navbar").innerHTML = data);
+</script>
 
-<div class="tenor-gif-embed" data-postid="25956183" data-share-method="host" data-aspect-ratio="1.79775" data-width="100%"><a href="https://tenor.com/view/monkey-type-gif-25956183">Monkey Type GIF</a>from <a href="https://tenor.com/search/monkey+type-gifs">Monkey Type GIFs</a></div> <script type="text/javascript" async src="https://tenor.com/embed.js"></script>
+    <div id="statusDiv"></div>
+    <form name="AuthForm" onsubmit="formProcessor(); return false">
+        <h3>Login Here</h3>
+
+        <label>Username</label>
+        <input type="text" name="Form_Username">
+
+        <label>Api Key</label>
+        <input type="text" name="Form_ApiKey">
+
+        <button type="submit">Log In</button>
+        <label>You Need to get Authorized first</label>
+    </form>
+
+  <script>
+    //variables
+    const Username = document.forms["AuthForm"]["Form_Username"].value;
+    const ApiKey = document.forms["AuthForm"]["Form_ApiKey"].value;
+    const OurForm = document.querySelector('[name="AuthForm"]');
+    const statusDiv = document.getElementById("statusDiv");
+
+    //current user is logged in, show you are logged in.
+    //if user is logged out, show the login form.
+
+    if(localStorage.Username !== undefined) {
+            console.log("logged in")
+            const NewDiv = document.createElement('div');
+            NewDiv.innerHTML = '<div style="position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); font-family:verdana; font-weight:bold; font-size:25px; color: #57f309; border: #f34709; background-color: #e94f55; padding: 20px;"><p>You are Already Logged in.</p><br><p style="color:black; font-size:17px; font-family:monospace;">Username:<p id="uname" style="font-family:monospace; font-weight:bold;color:white;"></p></p><button  onclick="logout();">Logout</button></div>';
+            OurForm.style.display = "none";
+            statusDiv.appendChild(NewDiv);
+            let uname = document.getElementById("uname")
+            uname.innerHTML=localStorage.getItem("Username");
+        }
+
+    function logout() {
+        window.localStorage.clear();
+        console.log("Logged out");
+        alert("Logged out");
+        window.location.reload();
+    }
+
+    function formProcessor() {
+
+    //to log user in
+        if (Username == '') {
+            alert("Userame must be filled out");
+            window.location.reload();
+        }
+        else if (ApiKey == '') {
+            alert("ApiKey must be filled out");
+            window.location.reload();
+        }
+        else if (ApiKey.length !== 235) {
+            alert("Wrong Format API Key\nAPI key is of 235 Characters.");
+            window.location.reload();
+        }
+        else{
+            localStorage.setItem("Username", Username);
+            localStorage.setItem("ApiKey", ApiKey);
+            alert("logged in");
+            window.location.reload();
+        }
+    }
+  </script>
+
+
+
 
 </body>
 </html>
+
+
+
+
