@@ -185,7 +185,7 @@ button{
             alert("ApiKey must be filled out");
             window.location.reload();
         }
-        else if (ApiKey.length !== 235) {
+        else if (ApiKey.length < 235 || ApiKey.length > 240) {
             alert("Wrong Format API Key\nAPI key is of 235 Characters.");
             window.location.reload();
         }
