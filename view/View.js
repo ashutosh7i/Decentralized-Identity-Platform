@@ -63,31 +63,76 @@ textarea1[0].style.display = "none";
 textarea1[1].style.display = "none";
 
 //page1SubmitKey.style.display = "none" //hide the submit button by default
-page1data1.addEventListener('input', (e) => { //show submit button only when something is present inside input field
-    e.preventDefault()
-    CID = page1data1.value;
-    if (CID !== "") {    //when textbox is not empty 
-        if (CID.length === 59) { //and a valid cid lenght
-            h3[0].innerHTML = '<centre><h3 style="color: green;">Valid CID</h3></centre>'
-            //page1SubmitKey.style.display = "block"
-        }
-        else {
-            //page1SubmitKey.style.display = "none"
-            h3[0].innerHTML = '<centre><h3 style="color: red;">Invalid CID</h3></centre>'
-        }
-    }
-    else {
-        h3[0].innerHTML = '<centre><h3 style="color: black;">Please Enter CID</h3></centre>'
-        validateEntry()
-        //page1SubmitKey.style.display = "none"
-    }
-})
+// page1data1.addEventListener('input', (e) => { //show submit button only when something is present inside input field
+//     e.preventDefault()
+//     CID = page1data1.value;
+//     if (CID !== "") {    //when textbox is not empty 
+//         if (CID.length === 59) { //and a valid cid lenght
+//             h3[0].innerHTML = '<centre><h3 style="color: green;">Valid CID</h3></centre>'
+//             //page1SubmitKey.style.display = "block"
+//         }
+//         else {
+//             //page1SubmitKey.style.display = "none"
+//             h3[0].innerHTML = '<centre><h3 style="color: red;">Invalid CID</h3></centre>'
+//         }
+//     }
+//     else {
+//         h3[0].innerHTML = '<centre><h3 style="color: black;">Please Enter CID</h3></centre>'
+//         validateEntry()
+//         //page1SubmitKey.style.display = "none"
+//     }
+// })
 
+//fetch the cid by username from db
+//code for creating a dropdown 
+let request = indexedDB.open("mydatabase", 1);
+var RetreivedCid;
+request.onsuccess = function (event) {
+    let db = event.target.result;
+    let tx = db.transaction("messages", "readonly");
+    let messagesStore = tx.objectStore("messages");
+    let index = messagesStore.index("username");
+
+    let getAllRequest = index.getAll(localStorage.Username);
+
+    getAllRequest.onsuccess = function (event) {
+        let messages = event.target.result;
+
+        let select = document.getElementById("message-select");
+        messages.forEach(function (message) {
+            let option = document.createElement("option");
+            option.value = message.cid;
+            option.text = message.label;
+            select.add(option);
+        });
+        //cid of first by default
+        // Print CID of the first message by default
+        const firstOptionValue = select.options[0].value;
+        const firstMessage = messages.find(function (message) {
+            return message.cid === firstOptionValue;
+        });
+        RetreivedCid = JSON.parse(firstMessage.cid).cid;
+        console.log(RetreivedCid);
+        //update on change
+        select.onchange = function () {
+            let selectedValue = select.value;
+            let selectedMessage = messages.find(function (message) {
+                return message.cid === selectedValue;
+            });
+            RetreivedCid = JSON.parse(selectedMessage.cid).cid;
+            console.log(RetreivedCid);
+        };
+    };
+
+    getAllRequest.onerror = function (event) {
+        console.error("Error retrieving messages from database:", event.target.error);
+    };
+};
 
 nextButton.addEventListener('click', (event) => {
     event.preventDefault()
     //use api to fetch that cid from server
-    const url = `https://gateway.ipfs.io/ipfs/${CID}`;
+    const url = `https://gateway.ipfs.io/ipfs/${RetreivedCid}`;
 
     fetch(url)
         .then(response => response.text())
