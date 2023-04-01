@@ -1,31 +1,20 @@
-<!--sample snippet for html page with copy when clipboard emoji clicked. -->
-<div class="copy-container">
-    <textarea cols="120" style="max-width: 100%; resize: none;" id="page1show1"></textarea>
-    <i onclick="copyText()" id="page1show1" class="copy-icon">📋</i>
-  </div>
+<!DOCTYPE html>
+<html lang='en'>
+<head>
+<meta charset='UTF-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1.0'>
+<meta http-equiv='X-UA-Compatible' content='ie=edge'>
+<title>test</title>
+<link rel='stylesheet' href=''>
+<script defer>
 
-  <script>
-    function copyText() {   // Function to copy the text from the textarea
-    var textarea = document.querySelectorAll("#page1show1")
-    textarea[0].select();   // Select the text in the textarea
-    document.execCommand("copy");   // Copy the text to the clipboard
-    alert("Base64 copied to clipboard!");   // Alert the user that the text has been copied
-    }
- </script>
+// Let us open our database
+const request = window.indexedDB.open("CID_Database", 3);
+const objectStore = db.createObjectStore("CID", { keyPath: "title" });
 
+</script>
+</head>
+<body>
 
-  <style>
-    .copy-container {
-      position: relative;
-      display: inline-block;
-    }
-    .copy-icon {
-      position: absolute;
-      top: 50%;
-      right: 10px;
-      transform: translateY(-50%);
-      font-size: 1.5em;
-      cursor: pointer;
-    }
-  </style>
-  
+</body>
+</html>
