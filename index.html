@@ -21,19 +21,16 @@
     <h1>Welcome to the Decentralized Identity Platform</h1>
     <p>Decentralized identity platform (DIP) for secure storage and easy access to personal documents using IPFS,Filecoin & Web3Storage.js .    </p>
     <p>Our platform provides a secure and decentralized way to manage and store your personal documents and information. You can easily add, view and manage your documents using our user-friendly interface.</p>
-    <p>To get started, simply click on one of the links above to go to the corresponding page.</p>
+    <p>To get started, follow these simple steps:</p>
+      <ol>
+        <li>Create an account on <a href="https://web3.storage/login/">Web3.storage</a></li>
+        <li>Create an API key using <a href="https://web3.storage/tokens/?create=true">this link</a></li>
+        <li>Log in to the application by clicking the button below:</li>
+      </ol>
+      <a href="./auth/auth.html" class="btn">Log In</a><br>
+      <p>Simply click on one of the links on navbar to go to the corresponding page.</p>
+      
   </div>
 
 </body>
-<script>
-if(localStorage.Username == undefined) {
-  console.log("not logged in")
-  let statusDiv=document.querySelector('.container');
-  statusDiv.className="null";//no class
-  statusDiv.innerHTML = '<div style="position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); font-family:verdana; font-weight:bold; font-size:25px; color: #57f309; border: #f34709; background-color: #e94f55; padding: 20px;"><p>You need to be Logged in.</p><button  onclick=login()>Login</button></div>';
-}
-function login(){
-window.location.replace("../auth/auth.html");
-}
-</script>
 </html>
