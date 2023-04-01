@@ -44,12 +44,13 @@ ul {
   
   .container {
     margin: 3rem auto;
-    max-width: 500px;
+    max-width: 800px;
     background: white;
     border-radius: 1rem;
-    padding: 2rem;
+    padding: 40px 20px;
+    text-align: center;
   }
-  
+
   .form-input {
     width: 100%;
     border: 1px solid #ddd;

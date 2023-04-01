@@ -21,16 +21,33 @@
     <h1>Welcome to the Decentralized Identity Platform</h1>
     <p>Decentralized identity platform (DIP) for secure storage and easy access to personal documents using IPFS,Filecoin & Web3Storage.js .    </p>
     <p>Our platform provides a secure and decentralized way to manage and store your personal documents and information. You can easily add, view and manage your documents using our user-friendly interface.</p>
-    <p>To get started, follow these simple steps:</p>
-      <ol>
-        <li>Create an account on <a href="https://web3.storage/login/">Web3.storage</a></li>
-        <li>Create an API key using <a href="https://web3.storage/tokens/?create=true">this link</a></li>
-        <li>Log in to the application by clicking the button below:</li>
-      </ol>
-      <a href="./auth/auth.html" class="btn">Log In</a><br>
-      <p>Simply click on one of the links on navbar to go to the corresponding page.</p>
-      
+      <div id="statusDiv"></div>
   </div>
 
 </body>
+<script>//auth check
+  if(localStorage.Username == undefined) {
+        console.log("not logged in")
+        let statusDiv=document.getElementById("statusDiv")
+        statusDiv.className="null";//no class
+        const instructions = '<h1 style="font-size: 2em; margin-bottom: 20px;">Getting Started</h1><ol>'+
+                    '<li><h3>Create an account on <a href="https://web3.storage/login/" style="color: #4CAF50; text-decoration: none;">Web3.storage</a></h3></li>'+
+                    '<li><h3>Create an API key using <a href="https://web3.storage/tokens/?create=true" style="color: #4CAF50; text-decoration: none;">this link</a></h3></li>'+
+                    '<li><h3>Log in to the application by clicking the button below:</h3></li>'+
+                    '<a href="./auth/auth.html" class="btn btn-primary" style="background-color: #19f4d0; font-family:monospace; color: white; padding: 10px 20px; font-weight:bold;text-decoration: none; font-size: 1.5em; border-radius: 5px;">Log In</a><br></ol>';
+        statusDiv.innerHTML = instructions;
+    }
+    else {
+      const loggedInMsg = '<h1>Thank you for logging in</h1>' +
+                    '<h3>👉 Go to <a href="./add/Add.html">Add➕</a> tab to add a file to IPFS.</h3>' +
+                    '<h3>👉 Go to <a href="./view/View.html">View👀</a> tab to get back file from IPFS.</h3>' +
+                    '<h3>👉 Go to <a href="./info/info.html">Info🤔</a> tab to Get info.</h3>' +
+                    '<h3>👉 Go to <a href="./logs/logs.html">Logs📃</a> tab to Get all logs.</h3>' +
+                    '<h3>👉 Go to <a href="./auth/auth.html">Auth🔐</a> for Authorization</h3>';
+        statusDiv.innerHTML = loggedInMsg;
+      }
+    function login(){
+     window.location.replace("../auth/auth.html");
+    }
+  </script>
 </html>
