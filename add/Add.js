@@ -197,6 +197,35 @@ nextButton.addEventListener('click', (event) => {
                         nextButton.style.display = "none"
                         previousButton.style.display = "none"
 
+                        //saving to indexdb
+                        const label = document.getElementById("label").value;
+                        let request = indexedDB.open("mydatabase", 1);
+
+                        request.onupgradeneeded = function (event) {
+                            let db = event.target.result;
+                            let messagesStore = db.createObjectStore("messages", { keyPath: "id", autoIncrement: true });
+                            messagesStore.createIndex("username", "username", { unique: false });
+                        };
+
+                        request.onsuccess = function (event) {
+                            let db = event.target.result;
+                            let tx = db.transaction("messages", "readwrite");
+                            let messagesStore = tx.objectStore("messages");
+
+                            let newMessage = { label: label, cid: CID, username: localStorage.Username };
+                            messagesStore.add(newMessage);
+
+                            tx.oncomplete = function (event) {
+                                console.log("Message saved to database.");
+                                document.getElementById("label").style.display = "none";
+                                document.getElementById("labell").style.display = "none";
+                            };
+
+                            tx.onerror = function (event) {
+                                console.error("Error saving message to database:", event.target.error);
+                            };
+                        };
+
                         //show the cyphertext in textbox
                         textarea3[0].value = onlyCid
                         textarea3[0].style.display = "block";
